@@ -27,11 +27,13 @@ io.sockets.on('connection', function (socket) {// WebSocket Connection
             return;
         }
         lightvalue = value;
+        console.log(lightvalue);
         socket.emit('light', lightvalue); //send button status to client
     });
     socket.on('light', function(data) { //get light switch status from client
         lightvalue = data;
         if (lightvalue != LED.readSync()) { //only change LED if status has changed
+            console.log(lightvalue);
             LED.writeSync(lightvalue); //turn LED on or off
         }
     });
